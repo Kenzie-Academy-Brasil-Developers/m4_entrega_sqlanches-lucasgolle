@@ -10,12 +10,13 @@ CREATE TABLE IF NOT EXISTS clientes (
 );
 -- Tabela endereços
 
-CREATE TABLE IF NOT EXISTS enderecos (
+CREATE TABLE IF NOT EXISTS endereços (
   id BIGSERIAL PRIMARY KEY,
   cep VARCHAR(9) NOT NULL,
   rua VARCHAR(50) NOT NULL,
   numero INTEGER NOT NULL,
-  bairro VARCHAR(100),
+  bairro VARCHAR(50) NOT NULL,
+  complemento VARCHAR(100),
   cliente_id INTEGER UNIQUE NOT NULL,
   FOREIGN KEY (cliente_id) REFERENCES clientes (id) ON DELETE CASCADE
 );
@@ -33,12 +34,13 @@ CREATE TABLE IF NOT EXISTS produtos (
   id BIGSERIAL PRIMARY KEY,
   nome VARCHAR(100) UNIQUE NOT NULL,
   tipo VARCHAR(30) NOT NULL,
+  preço FLOAT NOT NULL,
   pts_de_lealdade INTEGER NOT NULL
 );
 
 -- Tabela produtos_pedidos
 
-CREATE TABLE IF NOT EXISTS produstos_pedidos (
+CREATE TABLE IF NOT EXISTS produtos_pedidos (
   id BIGSERIAL PRIMARY KEY,
   pedido_id INTEGER UNIQUE NOT NULL,
   produto_id INTEGER UNIQUE NOT NULL,
